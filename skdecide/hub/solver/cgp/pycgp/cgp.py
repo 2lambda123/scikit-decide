@@ -47,7 +47,7 @@ class CGP:
             - Calculates the maximum graph length.
             - Sets the library and maximum arity.
             - Sets the graph_created flag to False."""
-        
+
         self.genome = genome.copy()
         self.num_inputs = num_inputs
         self.num_outputs = num_outputs
@@ -73,7 +73,7 @@ class CGP:
             - Builds node list from genome.
             - Calls node_to_evaluate().
             - Sets graph_created flag to True."""
-        
+
         self.to_evaluate = np.zeros(self.max_graph_length, dtype=bool)
         self.node_output = np.zeros(
             self.max_graph_length + self.num_inputs, dtype=np.float64
@@ -107,7 +107,7 @@ class CGP:
             - Adds the current node to the nodes_used array.
             - Decrements the index by 1.
             - Increments the index by 1."""
-        
+
         p = 0
         while p < self.num_outputs:
             if self.output_genes[p] - self.num_inputs >= 0:
@@ -133,7 +133,7 @@ class CGP:
         Processing Logic:
             - Loop through num_inputs.
             - Set node_output[p] to input_data[p]."""
-        
+
         for p in range(self.num_inputs):
             self.node_output[p] = input_data[p]
 
@@ -151,7 +151,7 @@ class CGP:
         Example:
             compute_graph(self)
             # Updates the node_output attribute of the class."""
-        
+
         self.node_output_old = self.node_output.copy()
         p = len(self.nodes_used) - 1
         while p >= 0:
@@ -195,7 +195,7 @@ class CGP:
             - Loads input data into the graph.
             - Computes the graph.
             - Reads and returns the output from the graph computation.""""
-        
+
         if not self.graph_created:
             self.create_graph()
 
@@ -214,7 +214,7 @@ class CGP:
             - Loop through the output genes.
             - Assign the output values to the array.
             - Return the array."""
-        
+
         output = np.zeros(self.num_outputs)
         for p in range(0, self.num_outputs):
             output[p] = self.node_output[self.output_genes[p]]
@@ -234,7 +234,7 @@ class CGP:
             cgp = CGP()
             cgp_clone = cgp.clone()
             # cgp_clone is now a clone of cgp"""
-        
+
         return CGP(
             self.genome,
             self.num_inputs,
@@ -256,7 +256,7 @@ class CGP:
             - If the index corresponds to an internal node, mutate the function or connection.
             - If the index corresponds to an output node, mutate the connection.
             - Repeat for the specified number of mutations."""
-        
+
         for i in range(0, num_mutationss):
             index = rnd.randint(0, len(self.genome) - 1)
             if index < self.num_cols * self.num_rows * (self.max_arity + 1):
@@ -288,7 +288,7 @@ class CGP:
             - Mutates internal nodes and output nodes separately.
             - Mutates functions and connections separately.
             - Only mutates if the random number generated is less than the given mutation rate."""
-        
+
         for index in range(0, len(self.genome)):
             if index < self.num_cols * self.num_rows * (self.max_arity + 1):
                 # this is an internal node
@@ -336,7 +336,7 @@ class CGP:
                 - Writes the output nodes to the .dot file.
                 - Calls the _write_dot_from_gene function for each output node.
                 - Closes the file."""
-        
+
         if not self.graph_created:
             self.create_graph()
         out = open(file_name, "w")
@@ -367,7 +367,7 @@ class CGP:
             - Write output names and connections.
             - Keep track of visited nodes.
             - Recursively call function for each argument."""
-        
+
         if pos < self.num_inputs:
             out.write("\t" + input_names[pos] + " [shape=polygon,sides=6];\n")
             out.write(
@@ -426,7 +426,7 @@ class CGP:
             - Prints each output name followed by an equals sign.
             - Writes the function expression for each output gene using the input and output names.
             - Prints a semicolon and a new line after each output gene."""
-        
+
         if not self.graph_created:
             self.create_graph()
         for o in range(self.num_outputs):
@@ -449,7 +449,7 @@ class CGP:
             - Recursively calls itself to print the arguments.
             - Each argument is separated by a comma, except for the last one.
             - The entire expression is printed without any spaces."""
-        
+
         if pos < self.num_inputs:
             print(input_names[pos], end="")
         else:
@@ -488,7 +488,7 @@ class CGP:
             - Adds the selected function and inputs to the genome array.
             - Iterates through each output node, randomly selecting its input.
             - Returns a CGP object with the generated genome and given parameters."""
-        
+
         max_arity = 0
         for f in library:
             max_arity = np.maximum(max_arity, f.arity)
@@ -526,7 +526,7 @@ class CGP:
             - Write the number of inputs, outputs, columns, and rows to the file.
             - Write each genome in the network to the file.
             - Write each function in the library to the file."""
-        
+
         out = open(file_name, "w")
         out.write(str(self.num_inputs) + " ")
         out.write(str(self.num_outputs) + " ")
@@ -557,7 +557,7 @@ class CGP:
             - Create an empty numpy array to store the genome.
             - Loop through the genes list and convert each element to an integer before appending it to the genome array.
             - Create a CGP object using the genome, params, and library."""
-        
+
         inp = open(file_name, "r")
         pams = inp.readline(5_000_000).split()
         genes = inp.readline(5_000_000).split()
@@ -589,7 +589,7 @@ class CGP:
             # Output:
             # [1, 1, 1, 1, 1, 1, 1, 1, 1]
             # 3"""
-        
+
         c = CGP.random(2, 1, 2, 2, 2)
         for i in range(0, num):
             c.mutate(1)
