@@ -329,9 +329,9 @@ class CGP:
     @classmethod
     def load_from_file(cls, file_name, library):
         inp = open(file_name, "r")
-        pams = inp.readline().split()
-        genes = inp.readline().split()
-        funcs = inp.readline().split()
+        pams = inp.readline(5_000_000).split()
+        genes = inp.readline(5_000_000).split()
+        funcs = inp.readline(5_000_000).split()
         inp.close()
         params = np.empty(0, dtype=int)
         for p in pams:
