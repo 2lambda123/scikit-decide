@@ -43,8 +43,7 @@ class WeatherInterpolator(ABC):
         ...
 
     @abstractmethod
-    def render(self, ax, **kwargs):
-        ...
+    def render(self, ax, **kwargs): ...
 
 
 class WeatherForecastInterpolator(WeatherInterpolator):
@@ -70,11 +69,13 @@ class WeatherForecastInterpolator(WeatherInterpolator):
                 var: self.datas[var].item()["feets"] for var in self.datas.keys()
             }
             self.time_dict = {
-                var: self.datas[var].item()["times"]
-                if self.time_cut_index is None
-                else self.datas[var].item()["times"][
-                    : min(self.time_cut_index, len(self.datas[var].item()["times"]))
-                ]
+                var: (
+                    self.datas[var].item()["times"]
+                    if self.time_cut_index is None
+                    else self.datas[var].item()["times"][
+                        : min(self.time_cut_index, len(self.datas[var].item()["times"]))
+                    ]
+                )
                 for var in self.datas.keys()
             }
             # Data Extraction

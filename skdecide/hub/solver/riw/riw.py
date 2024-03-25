@@ -109,9 +109,11 @@ try:
             self._domain_factory = domain_factory
             self._solver = riw_solver(
                 domain=self.get_domain(),
-                state_features=lambda d, s, i=None: self._state_features(d, s)
-                if not self._parallel
-                else d.call(i, 0, s),
+                state_features=lambda d, s, i=None: (
+                    self._state_features(d, s)
+                    if not self._parallel
+                    else d.call(i, 0, s)
+                ),
                 use_state_feature_hash=self._use_state_feature_hash,
                 use_simulation_domain=self._use_simulation_domain,
                 time_budget=self._time_budget,

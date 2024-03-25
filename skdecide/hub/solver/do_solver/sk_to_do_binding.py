@@ -81,9 +81,9 @@ def build_do_domain(
                     ].get_resource_need_at_time(
                         r, time=0
                     )  # should be constant anyway
-                mode_details_do[task][mode][
-                    "duration"
-                ] = scheduling_domain.get_task_duration(task=task, mode=mode)
+                mode_details_do[task][mode]["duration"] = (
+                    scheduling_domain.get_task_duration(task=task, mode=mode)
+                )
         return SingleModeRCPSPModel(
             resources={
                 r: scheduling_domain.get_original_quantity_resource(r)
@@ -112,9 +112,9 @@ def build_do_domain(
                     ].get_resource_need_at_time(
                         r, time=0
                     )  # should be constant anyway
-                mode_details_do[task][mode][
-                    "duration"
-                ] = scheduling_domain.sample_task_duration(task=task, mode=mode)
+                mode_details_do[task][mode]["duration"] = (
+                    scheduling_domain.sample_task_duration(task=task, mode=mode)
+                )
         return SingleModeRCPSPModel(
             resources={
                 r: scheduling_domain.get_original_quantity_resource(r)
@@ -143,9 +143,9 @@ def build_do_domain(
                     ].get_resource_need_at_time(
                         r, time=0
                     )  # should be constant anyway
-                mode_details_do[task][mode][
-                    "duration"
-                ] = scheduling_domain.get_task_duration(task=task, mode=mode)
+                mode_details_do[task][mode]["duration"] = (
+                    scheduling_domain.get_task_duration(task=task, mode=mode)
+                )
         return MultiModeRCPSPModel(
             resources={
                 r: scheduling_domain.get_original_quantity_resource(r)
@@ -174,9 +174,9 @@ def build_do_domain(
                     ].get_resource_need_at_time(
                         r, time=0
                     )  # should be constant anyway
-                mode_details_do[task][mode][
-                    "duration"
-                ] = scheduling_domain.get_task_duration(task=task, mode=mode)
+                mode_details_do[task][mode]["duration"] = (
+                    scheduling_domain.get_task_duration(task=task, mode=mode)
+                )
         horizon = scheduling_domain.get_max_horizon()
         return RCPSPModelCalendar(
             resources={
@@ -216,9 +216,9 @@ def build_do_domain(
                 for s in skills:
                     mode_details_do[task][mode][s] = skills[s]
                     skills_set.add(s)
-                mode_details_do[task][mode][
-                    "duration"
-                ] = scheduling_domain.get_task_duration(task=task, mode=mode)
+                mode_details_do[task][mode]["duration"] = (
+                    scheduling_domain.get_task_duration(task=task, mode=mode)
+                )
         horizon = scheduling_domain.get_max_horizon()
         employees_dict = {}
         employees = scheduling_domain.get_resource_units_names()

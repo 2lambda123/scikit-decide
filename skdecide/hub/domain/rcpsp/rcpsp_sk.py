@@ -344,7 +344,7 @@ def build_n_determinist_from_stochastic(srcpsp: Stochastic_RCPSP, nb_instance: i
                 max_horizon=srcpsp.get_max_horizon(),
                 # resource_availability=srcpsp.resource_availability,
                 resource_availability=resource_availability_dict,
-                resource_renewable=srcpsp.get_resource_renewability()
+                resource_renewable=srcpsp.get_resource_renewability(),
                 # resource_renewable=srcpsp.resource_renewable
             )
         ]
@@ -494,7 +494,8 @@ class MSRCPSP(D):
 
     def _get_resource_type_for_unit(self) -> Dict[str, str]:
         """Return a dictionary where the key is a resource unit name and the value a resource type name.
-        An empty dictionary can be used if there are no resource unit matching a resource type."""
+        An empty dictionary can be used if there are no resource unit matching a resource type.
+        """
         return None
 
     def get_max_horizon(self) -> int:
@@ -596,7 +597,8 @@ class MSRCPSPCalendar(D):
 
     def _get_resource_type_for_unit(self) -> Dict[str, str]:
         """Return a dictionary where the key is a resource unit name and the value a resource type name.
-        An empty dictionary can be used if there are no resource unit matching a resource type."""
+        An empty dictionary can be used if there are no resource unit matching a resource type.
+        """
         return None
 
     def get_max_horizon(self) -> int:

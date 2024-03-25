@@ -17,7 +17,8 @@ class WithPreallocations:
     ) -> Dict[int, List[str]]:  # TODO: To be handled by domain (applicable actions)
         """
         Return a dictionary where the key is the id of a task (int)
-        and the value indicates the pre-allocated resources for this task (as a list of str)"""
+        and the value indicates the pre-allocated resources for this task (as a list of str)
+        """
         raise NotImplementedError
 
     def get_preallocations(
@@ -25,7 +26,8 @@ class WithPreallocations:
     ) -> Dict[int, List[str]]:  # TODO: To be handled by domain (applicable actions)
         """
         Return a dictionary where the key is the id of a task (int)
-        and the value indicates the pre-allocated resources for this task (as a list of str)"""
+        and the value indicates the pre-allocated resources for this task (as a list of str)
+        """
         return self._get_preallocations()
 
 

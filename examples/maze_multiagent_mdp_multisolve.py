@@ -273,12 +273,16 @@ class MultiAgentMaze(D):
                 occupied_cells[tuple(next_state[agent])] = agent
         return TransitionOutcome(
             state=HashableDict(next_state),
-            value=transition_value
-            if not self._flatten_data
-            else Value(cost=sum(v.cost for a, v in transition_value.items())),
-            termination=dead_end
-            if not self._flatten_data
-            else all(t for a, t in dead_end.items()),
+            value=(
+                transition_value
+                if not self._flatten_data
+                else Value(cost=sum(v.cost for a, v in transition_value.items()))
+            ),
+            termination=(
+                dead_end
+                if not self._flatten_data
+                else all(t for a, t in dead_end.items())
+            ),
             info=None,
         )
 
