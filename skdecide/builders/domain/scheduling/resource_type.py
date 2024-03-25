@@ -48,12 +48,14 @@ class WithResourceUnits:
 
     def get_resource_type_for_unit(self) -> Dict[str, str]:
         """Return a dictionary where the key is a resource unit name and the value a resource type name.
-        An empty dictionary can be used if there are no resource unit matching a resource type."""
+        An empty dictionary can be used if there are no resource unit matching a resource type.
+        """
         return self._get_resource_type_for_unit()
 
     def _get_resource_type_for_unit(self) -> Dict[str, str]:
         """Return a dictionary where the key is a resource unit name and the value a resource type name.
-        An empty dictionary can be used if there are no resource unit matching a resource type."""
+        An empty dictionary can be used if there are no resource unit matching a resource type.
+        """
         raise NotImplementedError
 
 

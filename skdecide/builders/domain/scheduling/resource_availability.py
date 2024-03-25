@@ -20,18 +20,22 @@ class UncertainResourceAvailabilityChanges:
     def _sample_quantity_resource(self, resource: str, time: int, **kwargs) -> int:
         """Sample an amount of resource availability (int) for the given resource
         (either resource type or resource unit) at the given time. This number should be the sum of the number of
-        resource available at time t and the number of resource of this type consumed so far)."""
+        resource available at time t and the number of resource of this type consumed so far).
+        """
         raise NotImplementedError
 
     def sample_quantity_resource(self, resource: str, time: int, **kwargs) -> int:
         """Sample an amount of resource availability (int) for the given resource
         (either resource type or resource unit) at the given time. This number should be the sum of the number of
-        resource available at time t and the number of resource of this type consumed so far)."""
+        resource available at time t and the number of resource of this type consumed so far).
+        """
         return self._sample_quantity_resource(resource=resource, time=time, **kwargs)
 
     def check_unique_resource_names(
         self,
-    ) -> bool:  # TODO: How to enforce a call to this function when initialising a domain ?
+    ) -> (
+        bool
+    ):  # TODO: How to enforce a call to this function when initialising a domain ?
         """Return True if there are no duplicates in resource names across both resource types
         and resource units name lists."""
         list1 = self.get_resource_types_names() + self.get_resource_units_names()
@@ -57,7 +61,8 @@ class DeterministicResourceAvailabilityChanges(UncertainResourceAvailabilityChan
     def _sample_quantity_resource(self, resource: str, time: int, **kwargs) -> int:
         """Sample an amount of resource availability (int) for the given resource
         (either resource type or resource unit) at the given time. This number should be the sum of the number of
-        resource available at time t and the number of resource of this type consumed so far)."""
+        resource available at time t and the number of resource of this type consumed so far).
+        """
         return self.get_quantity_resource(resource, time, **kwargs)
 
 
@@ -80,5 +85,6 @@ class WithoutResourceAvailabilityChange(DeterministicResourceAvailabilityChanges
     def _sample_quantity_resource(self, resource: str, time: int, **kwargs) -> int:
         """Sample an amount of resource availability (int) for the given resource
         (either resource type or resource unit) at the given time. This number should be the sum of the number of
-        resource available at time t and the number of resource of this type consumed so far)."""
+        resource available at time t and the number of resource of this type consumed so far).
+        """
         return self.get_original_quantity_resource(resource)

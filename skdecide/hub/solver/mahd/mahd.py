@@ -63,11 +63,11 @@ class MAHD(Solver, DeterministicPolicies, Utilities):
             )
             self._singleagent_domain_class.solve_with(
                 solver=self._singleagent_solvers[a],
-                domain_factory=lambda: self._singleagent_domain_factory(
-                    self._multiagent_domain, a
-                )
-                if self._singleagent_domain_factory is not None
-                else None,
+                domain_factory=lambda: (
+                    self._singleagent_domain_factory(self._multiagent_domain, a)
+                    if self._singleagent_domain_factory is not None
+                    else None
+                ),
             )
 
         self._singleagent_solutions = {

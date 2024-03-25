@@ -95,7 +95,7 @@ def fitness_makespan_correlation():
         delta_time_freedom=0,
         deap_verbose=True,
         evaluation=evaluation,
-        permutation_distance=PermutationDistance.KTD
+        permutation_distance=PermutationDistance.KTD,
         # permutation_distance = PermutationDistance.KTD_HAMMING
     )
 
@@ -201,7 +201,7 @@ def run_gphh():
             reference_permutations=cp_reference_permutations,
             # reference_makespans=cp_reference_makespans,
             training_domains_names=training_domains_names,
-            params_gphh=ParametersGPHH.fast_test()
+            params_gphh=ParametersGPHH.fast_test(),
             # params_gphh=ParametersGPHH.default()
         )
         solver.solve(domain_factory=lambda: domain)
@@ -692,7 +692,7 @@ def run_comparaison_stochastic():
                 delta_time_freedom=0,
                 deap_verbose=True,
                 evaluation=EvaluationGPHH.SGS_DEVIATION,
-                permutation_distance=PermutationDistance.KTD
+                permutation_distance=PermutationDistance.KTD,
                 # permutation_distance = PermutationDistance.KTD_HAMMING
             )
 
@@ -703,7 +703,7 @@ def run_comparaison_stochastic():
                 reference_permutations=cp_reference_permutations,
                 # reference_makespans=cp_reference_makespans,
                 training_domains_names=training_domains_names,
-                params_gphh=params_gphh
+                params_gphh=params_gphh,
                 # set_feature=set_feature)
             )
             solver.solve(domain_factory=lambda: domain)
@@ -943,7 +943,7 @@ def run_comparaison():
             delta_time_freedom=0,
             deap_verbose=True,
             evaluation=EvaluationGPHH.SGS_DEVIATION,
-            permutation_distance=PermutationDistance.KTD
+            permutation_distance=PermutationDistance.KTD,
             # permutation_distance = PermutationDistance.KTD_HAMMING
         )
 

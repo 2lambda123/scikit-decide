@@ -12,7 +12,8 @@ __all__ = ["MultiMode", "SingleMode"]
 class ModeConsumption:
     def _get_resource_need_at_time(self, resource_name: str, time: int):
         """Return the resource consumption for the given resource at the given time.
-        Note that the time should be the time from the start of the execution of the task (starting from 0)."""
+        Note that the time should be the time from the start of the execution of the task (starting from 0).
+        """
         raise NotImplementedError
 
     def _get_non_zero_ressource_need_names(self, time: int):
@@ -23,7 +24,8 @@ class ModeConsumption:
 
     def get_resource_need_at_time(self, resource_name: str, time: int):
         """Return the resource consumption for the given resource at the given time.
-        Note that the time should be the time from the start of the execution of the task (starting from 0)."""
+        Note that the time should be the time from the start of the execution of the task (starting from 0).
+        """
         return self._get_resource_need_at_time(resource_name=resource_name, time=time)
 
     def get_non_zero_ressource_need_names(self, time: int):
@@ -41,7 +43,8 @@ class VaryingModeConsumption(ModeConsumption):
 
     def _get_resource_need_at_time(self, resource_name: str, time: int):
         """Return the resource consumption for the given resource at the given time.
-        Note that the time should be the time from the start of the execution of the task (starting from 0)."""
+        Note that the time should be the time from the start of the execution of the task (starting from 0).
+        """
         if resource_name in self.mode_details:
             return self.mode_details[resource_name][time]
         else:
@@ -76,7 +79,8 @@ class ConstantModeConsumption(VaryingModeConsumption):
 
     def _get_resource_need_at_time(self, resource_name: str, time: int):
         """Return the resource consumption for the given resource at the given time.
-        Note that the time should be the time from the start of the execution of the task (starting from 0)."""
+        Note that the time should be the time from the start of the execution of the task (starting from 0).
+        """
         return self._get_resource_need(resource_name=resource_name)
 
 

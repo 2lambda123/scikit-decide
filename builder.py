@@ -1,6 +1,7 @@
 """
 Adapted from https://github.com/pybind/cmake_example
 """
+
 import fileinput
 import os
 import platform
@@ -28,7 +29,6 @@ class CMakeExtension(Extension):
         cmake_component: str = None,
         cmake_depends_on: List[str] = (),
     ) -> None:
-
         """
         Custom setuptools extension that configures a CMake project.
         Args:

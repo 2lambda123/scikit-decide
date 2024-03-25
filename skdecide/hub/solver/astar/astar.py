@@ -87,9 +87,9 @@ try:
             self._solver = astar_solver(
                 domain=self.get_domain(),
                 goal_checker=lambda d, s: d.is_goal(s),
-                heuristic=lambda d, s: self._heuristic(d, s)
-                if not self._parallel
-                else d.call(None, 0, s),
+                heuristic=lambda d, s: (
+                    self._heuristic(d, s) if not self._parallel else d.call(None, 0, s)
+                ),
                 parallel=self._parallel,
                 debug_logs=self._debug_logs,
             )
