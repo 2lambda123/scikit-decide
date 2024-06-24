@@ -87,9 +87,11 @@ try:
             self._domain_factory = domain_factory
             self._solver = iw_solver(
                 domain=self.get_domain(),
-                state_features=lambda d, s: self._state_features(d, s)
-                if not self._parallel
-                else d.call(None, 0, s),
+                state_features=lambda d, s: (
+                    self._state_features(d, s)
+                    if not self._parallel
+                    else d.call(None, 0, s)
+                ),
                 use_state_feature_hash=self._use_state_feature_hash,
                 node_ordering=self._node_ordering,
                 time_budget=self._time_budget,

@@ -93,9 +93,9 @@ try:
             self._solver = aostar_solver(
                 domain=self.get_domain(),
                 goal_checker=lambda d, s: d.is_goal(s),
-                heuristic=lambda d, s: self._heuristic(d, s)
-                if not self._parallel
-                else d.call(None, 0, s),
+                heuristic=lambda d, s: (
+                    self._heuristic(d, s) if not self._parallel else d.call(None, 0, s)
+                ),
                 discount=self._discount,
                 max_tip_expansions=self._max_tip_expansions,
                 detect_cycles=self._detect_cycles,

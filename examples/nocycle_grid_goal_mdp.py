@@ -198,10 +198,12 @@ class MyDomain(D):
     def _get_goals_(self) -> D.T_agent[Space[D.T_observation]]:
         # return ImplicitSpace(lambda s: s.x == self.num_cols - 1 and s.y == self.num_rows - 1)
         return ImplicitSpace(
-            lambda s: True
-            if (s.x == self.num_cols - 1 and s.y == self.num_rows - 1)
-            or (s.x == -1 and s.y == -1)
-            else False
+            lambda s: (
+                True
+                if (s.x == self.num_cols - 1 and s.y == self.num_rows - 1)
+                or (s.x == -1 and s.y == -1)
+                else False
+            )
         )  # trick to consider dead-end state as a goal to  avoid modeling cycles
 
     def _get_initial_state_(self) -> D.T_state:

@@ -111,12 +111,12 @@ try:
             self._domain_factory = domain_factory
             self._solver = lrtdp_solver(
                 domain=self.get_domain(),
-                goal_checker=lambda d, s, i=None: d.is_goal(s)
-                if not self._parallel
-                else d.is_goal(s, i),
-                heuristic=lambda d, s, i=None: self._heuristic(d, s)
-                if not self._parallel
-                else d.call(i, 0, s),
+                goal_checker=lambda d, s, i=None: (
+                    d.is_goal(s) if not self._parallel else d.is_goal(s, i)
+                ),
+                heuristic=lambda d, s, i=None: (
+                    self._heuristic(d, s) if not self._parallel else d.call(i, 0, s)
+                ),
                 use_labels=self._use_labels,
                 time_budget=self._time_budget,
                 rollout_budget=self._rollout_budget,

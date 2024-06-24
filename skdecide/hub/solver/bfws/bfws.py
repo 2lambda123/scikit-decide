@@ -94,15 +94,19 @@ try:
             self._domain_factory = domain_factory
             self._solver = bfws_solver(
                 domain=self.get_domain(),
-                state_features=lambda d, s: self._state_features(d, s)
-                if not self._parallel
-                else d.call(None, 0, s),
-                heuristic=lambda d, s: self._heuristic(d, s)
-                if not self._parallel
-                else d.call(None, 1, s),
-                termination_checker=lambda d, s: self._termination_checker(d, s)
-                if not self._parallel
-                else d.call(None, 2, s),
+                state_features=lambda d, s: (
+                    self._state_features(d, s)
+                    if not self._parallel
+                    else d.call(None, 0, s)
+                ),
+                heuristic=lambda d, s: (
+                    self._heuristic(d, s) if not self._parallel else d.call(None, 1, s)
+                ),
+                termination_checker=lambda d, s: (
+                    self._termination_checker(d, s)
+                    if not self._parallel
+                    else d.call(None, 2, s)
+                ),
                 parallel=self._parallel,
                 debug_logs=self._debug_logs,
             )

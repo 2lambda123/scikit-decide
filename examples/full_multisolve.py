@@ -396,9 +396,9 @@ if __name__ == "__main__":
                             if selected_domain["name"] == "Cart Pole (Gymnasium)":
                                 actual_domain_config["termination_is_goal"] = False
                             actual_domain = actual_domain_type(**actual_domain_config)
-                        selected_solver["config"][
-                            "domain_factory"
-                        ] = lambda: actual_domain_type(**actual_domain_config)
+                        selected_solver["config"]["domain_factory"] = (
+                            lambda: actual_domain_type(**actual_domain_config)
+                        )
                     with solver_type(**selected_solver["config"]) as solver:
                         actual_domain_type.solve_with(
                             solver, lambda: actual_domain_type(**actual_domain_config)

@@ -14,12 +14,14 @@ class VariableResourceConsumption:
 
     def _get_variable_resource_consumption(self) -> bool:
         """Return true if the domain has variable resource consumption,
-        false if the consumption of resource does not vary in time for any of the tasks"""
+        false if the consumption of resource does not vary in time for any of the tasks
+        """
         return True
 
     def get_variable_resource_consumption(self) -> bool:
         """Return true if the domain has variable resource consumption,
-        false if the consumption of resource does not vary in time for any of the tasks"""
+        false if the consumption of resource does not vary in time for any of the tasks
+        """
         return self._get_variable_resource_consumption()
 
 
@@ -28,5 +30,6 @@ class ConstantResourceConsumption(VariableResourceConsumption):
 
     def _get_variable_resource_consumption(self) -> bool:
         """Return true if the domain has variable resource consumption,
-        false if the consumption of resource does not vary in time for any of the tasks"""
+        false if the consumption of resource does not vary in time for any of the tasks
+        """
         return False

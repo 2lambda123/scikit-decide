@@ -875,9 +875,11 @@ class DeterministicGymDomain(D):
                 None,
                 None,
                 None,
-                self._get_state(self._gym_env)
-                if (self._get_state is not None and self._set_state is not None)
-                else None,
+                (
+                    self._get_state(self._gym_env)
+                    if (self._get_state is not None and self._set_state is not None)
+                    else None
+                ),
             ],
         )
 
@@ -906,9 +908,11 @@ class DeterministicGymDomain(D):
                 memory._state,
                 action,
                 outcome,
-                self._get_state(env)
-                if (self._get_state is not None and self._set_state is not None)
-                else None,
+                (
+                    self._get_state(env)
+                    if (self._get_state is not None and self._set_state is not None)
+                    else None
+                ),
             ],
         )
 

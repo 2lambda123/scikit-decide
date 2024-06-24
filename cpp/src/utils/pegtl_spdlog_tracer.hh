@@ -101,8 +101,8 @@ template <typename Rule> struct tracer : normal<Rule> {
   template <template <typename...> class Action, typename Iterator,
             typename Input, typename... States>
   static auto apply(const Iterator &begin, const Input &in, trace_state &ts,
-                    States &&...st)
-      -> decltype(apply<Action>(begin, in, st...)) {
+                    States &&...st) -> decltype(apply<Action>(begin, in,
+                                                              st...)) {
     std::ostringstream o;
     o << std::setw(6) << ++ts.line << "        ";
     o << in.position() << "  apply  " << internal::demangle<Rule>();
@@ -112,8 +112,8 @@ template <typename Rule> struct tracer : normal<Rule> {
 
   template <template <typename...> class Action, typename Input,
             typename... States>
-  static auto apply0(const Input &in, trace_state &ts, States &&...st)
-      -> decltype(apply0<Action>(in, st...)) {
+  static auto apply0(const Input &in, trace_state &ts,
+                     States &&...st) -> decltype(apply0<Action>(in, st...)) {
     std::ostringstream o;
     o << std::setw(6) << ++ts.line << "        ";
     o << in.position() << "  apply0 " << internal::demangle<Rule>();

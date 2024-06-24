@@ -38,9 +38,7 @@ class Environment:
     """
 
     @autocastable
-    def step(
-        self, action: D.T_agent[D.T_concurrency[D.T_event]]
-    ) -> EnvironmentOutcome[
+    def step(self, action: D.T_agent[D.T_concurrency[D.T_event]]) -> EnvironmentOutcome[
         D.T_agent[D.T_observation],
         D.T_agent[Value[D.T_value]],
         D.T_agent[D.T_predicate],
