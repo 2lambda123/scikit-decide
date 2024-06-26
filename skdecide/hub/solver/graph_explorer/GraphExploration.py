@@ -17,5 +17,4 @@ class GraphExploration:
     @abstractmethod
     def build_graph_domain(
         self, init_state: Any = None
-    ) -> Union[GraphDomain, GraphDomainUncertain]:
-        ...
+    ) -> Union[GraphDomain, GraphDomainUncertain]: ...

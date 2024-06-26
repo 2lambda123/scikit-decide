@@ -701,13 +701,13 @@ cast_dict = {
     (Union, List): lambda obj, src, dst: [cast(obj, src[0], dst[0])],
     (List, List): lambda obj, src, dst: [cast(x, src[0], dst[0]) for x in obj],
     (Union, Union): lambda obj, src, dst: cast(obj, src[0], dst[0]),
-    (Optional, Optional): lambda obj, src, dst: cast(obj, src[0], dst[0])
-    if obj is not None
-    else None,
+    (Optional, Optional): lambda obj, src, dst: (
+        cast(obj, src[0], dst[0]) if obj is not None else None
+    ),
 }  # (src_type, dst_type): (obj: src_type, src_sub_hintrees: List[Tree], dst_sub_hintrees: List[Tree]) -> dst_type
 
-default_cast = (
-    lambda obj, src, dst: obj._cast(src, dst) if isinstance(obj, Castable) else obj
+default_cast = lambda obj, src, dst: (
+    obj._cast(src, dst) if isinstance(obj, Castable) else obj
 )
 
 

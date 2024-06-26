@@ -631,9 +631,11 @@ def run_graph_exploration_conditional():
     ]
     for task in goal_states[0].task_ids:
         durations = [
-            s.tasks_details[task].end - s.tasks_details[task].start
-            if s.tasks_details[task].end is not None
-            else None
+            (
+                s.tasks_details[task].end - s.tasks_details[task].start
+                if s.tasks_details[task].end is not None
+                else None
+            )
             for s in goal_states
         ]
         print("Duration of task ", task, set(durations))

@@ -33,9 +33,9 @@ class SimulatedTaskDuration:
         if mode not in self.sampled_durations[task]:
             self.sampled_durations[task][mode] = {}
         if progress_from not in self.sampled_durations[task][mode]:
-            self.sampled_durations[task][mode][
-                progress_from
-            ] = self._sample_task_duration(task, mode, progress_from)
+            self.sampled_durations[task][mode][progress_from] = (
+                self._sample_task_duration(task, mode, progress_from)
+            )
         return self.sampled_durations[task][mode][progress_from]
 
     def _sample_task_duration(
@@ -276,7 +276,8 @@ class DeterministicTaskDuration(EnumerableTaskDuration):
         multivariate_settings: Optional[Dict[str, int]] = None,
     ):
         """Return the Distribution of the duration of the given task in the given mode.
-        Because the duration is deterministic, the distribution always returns the same duration."""
+        Because the duration is deterministic, the distribution always returns the same duration.
+        """
         return DiscreteDistribution([(self.get_task_duration(task, mode), 1)])
 
     def _get_task_duration_upper_bound(

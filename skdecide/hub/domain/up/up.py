@@ -220,12 +220,17 @@ class UPDomain(D):
     def _get_observation_space_(self) -> Space[D.T_observation]:
         return DictSpace(
             {
-                repr(k): gym.spaces.Discrete(2)
-                if v.is_bool_constant()
-                else gym.spaces.Discrete(self._int_fluent_domains[v])
-                if v.is_int_constant()
-                else gym.spaces.Box(
-                    self._real_fluent_domains[v][0], self._real_fluent_domains[v][1]
+                repr(k): (
+                    gym.spaces.Discrete(2)
+                    if v.is_bool_constant()
+                    else (
+                        gym.spaces.Discrete(self._int_fluent_domains[v])
+                        if v.is_int_constant()
+                        else gym.spaces.Box(
+                            self._real_fluent_domains[v][0],
+                            self._real_fluent_domains[v][1],
+                        )
+                    )
                 )
                 for k, v in self._simulator.get_initial_state()._values.items()
             }

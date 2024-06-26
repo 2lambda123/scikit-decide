@@ -143,16 +143,22 @@ try:
                 uct_mode=self._uct_mode,
                 ucb_constant=self._ucb_constant,
                 online_node_garbage=self._online_node_garbage,
-                custom_policy=None
-                if self._custom_policy is None
-                else lambda d, s, i=None: self._custom_policy(d, s)
-                if not self._parallel
-                else d.call(i, 0, s),
-                heuristic=None
-                if self._heuristic is None
-                else lambda d, s, i=None: self._heuristic(d, s)
-                if not self._parallel
-                else d.call(i, 1, s),
+                custom_policy=(
+                    None
+                    if self._custom_policy is None
+                    else lambda d, s, i=None: (
+                        self._custom_policy(d, s)
+                        if not self._parallel
+                        else d.call(i, 0, s)
+                    )
+                ),
+                heuristic=(
+                    None
+                    if self._heuristic is None
+                    else lambda d, s, i=None: (
+                        self._heuristic(d, s) if not self._parallel else d.call(i, 1, s)
+                    )
+                ),
                 state_expansion_rate=self._state_expansion_rate,
                 action_expansion_rate=self._action_expansion_rate,
                 transition_mode=self._transition_mode,
@@ -164,9 +170,11 @@ try:
                 back_propagator=self._back_propagator,
                 parallel=self._parallel,
                 debug_logs=self._debug_logs,
-                watchdog=self._watchdog
-                if self._watchdog is not None
-                else lambda elapsed_time, number_rollouts, best_value, epsilon_moving_average: True,
+                watchdog=(
+                    self._watchdog
+                    if self._watchdog is not None
+                    else lambda elapsed_time, number_rollouts, best_value, epsilon_moving_average: True
+                ),
             )
             self._solver.clear()
 

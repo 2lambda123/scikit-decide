@@ -167,7 +167,8 @@ class SchedulingDomain(
         action: D.T_agent[D.T_concurrency[D.T_event]],
     ) -> TransitionOutcome[D.T_state, D.T_agent[Value[D.T_value]], D.T_agent[D.T_info]]:
         """This function will be used if the domain is defined as a Simulation (i.e. transitions are defined by call to
-        a simulation). This function may also be used by simulation-based solvers on non-Simulation domains."""
+        a simulation). This function may also be used by simulation-based solvers on non-Simulation domains.
+        """
         current_state: State = memory
         next_state = current_state if self.inplace_environment else current_state.copy()
         next_state = self.update_pause_tasks_simulation(next_state, action)
@@ -466,7 +467,8 @@ class SchedulingDomain(
 
     def update_complete_tasks(self, state: State):
         """Update the status of newly completed tasks in the state from ongoing to complete
-        and update resource availability. This function will also log in task_details the time it was complete"""
+        and update resource availability. This function will also log in task_details the time it was complete
+        """
         next_state = state  # .copy()
         completed_tmp = []
         for task_id in next_state.tasks_ongoing:
@@ -602,7 +604,8 @@ class SchedulingDomain(
 
     def update_complete_tasks_simulation(self, state: State):
         """In a simulated scheduling environment, update the status of newly completed tasks in the state from ongoing to complete
-        and update resource availability. This function will also log in task_details the time it was complete"""
+        and update resource availability. This function will also log in task_details the time it was complete
+        """
         next_state: State = state
         next_state = self.update_complete_tasks_uncertain(
             states=DiscreteDistribution([(next_state, 1.0)])
@@ -674,7 +677,8 @@ class SchedulingDomain(
 
     def update_pause_tasks(self, state: State, action: SchedulingAction):
         """Update the status of a task from ongoing to paused if specified in the action
-        and update resource availability. This function will also log in task_details the time it was paused."""
+        and update resource availability. This function will also log in task_details the time it was paused.
+        """
         next_state = state  # .copy()
         if action.action == SchedulingActionEnum.PAUSE:
             paused_task = action.task
@@ -707,7 +711,8 @@ class SchedulingDomain(
 
     def update_resume_tasks(self, state: State, action: SchedulingAction):
         """Update the status of a task from paused to ongoing if specified in the action
-        and update resource availability. This function will also log in task_details the time it was resumed"""
+        and update resource availability. This function will also log in task_details the time it was resumed
+        """
         next_state = state  # .copy()
         if action.action == SchedulingActionEnum.RESUME:
             resumed_task = action.task
@@ -812,7 +817,8 @@ class SchedulingDomain(
 
     def update_start_tasks(self, state: State, action: SchedulingAction):
         """Update the status of a task from remaining to ongoing if specified in the action
-        and update resource availability. This function will also log in task_details the time it was started."""
+        and update resource availability. This function will also log in task_details the time it was started.
+        """
         if action.action == SchedulingActionEnum.START:
             can_be_started, resource_to_use = self.check_if_action_can_be_started(
                 state, action
@@ -980,13 +986,13 @@ class SchedulingDomain(
                 # update the resource used / resource availability function on the possible new availability
                 # and consumption of ongoing task -> quite boring to code and debug probably
                 for res in self.get_resource_units_names():
-                    next_state.resource_availability[
-                        res
-                    ] = self.sample_quantity_resource(resource=res, time=next_state.t)
+                    next_state.resource_availability[res] = (
+                        self.sample_quantity_resource(resource=res, time=next_state.t)
+                    )
                 for res in self.get_resource_types_names():
-                    next_state.resource_availability[
-                        res
-                    ] = self.sample_quantity_resource(resource=res, time=next_state.t)
+                    next_state.resource_availability[res] = (
+                        self.sample_quantity_resource(resource=res, time=next_state.t)
+                    )
                 # TODO :
                 # Here, if the resource_used[res] is > resource_availability[res] we should be forced to pause some task??
                 # If yes which one ? all ? and we let the algorithm resume the one of its choice in the next time step ?
@@ -1172,7 +1178,8 @@ class UncertainSchedulingDomain(SchedulingDomain, D_uncertain):
         action: D.T_agent[D.T_concurrency[D.T_event]],
     ) -> TransitionOutcome[D.T_state, D.T_agent[Value[D.T_value]], D.T_agent[D.T_info]]:
         """This function will be used if the domain is defined as a Simulation (i.e. transitions are defined by call to
-        a simulation). This function may also be used by simulation-based solvers on non-Simulation domains."""
+        a simulation). This function may also be used by simulation-based solvers on non-Simulation domains.
+        """
         return UncertainTransitions._state_sample(self, memory, action)
 
 
@@ -1188,7 +1195,8 @@ class DeterministicSchedulingDomain(SchedulingDomain, D_det):
         action: D.T_agent[D.T_concurrency[D.T_event]],
     ) -> TransitionOutcome[D.T_state, D.T_agent[Value[D.T_value]], D.T_agent[D.T_info]]:
         """This function will be used if the domain is defined as a Simulation (i.e. transitions are defined by call to
-        a simulation). This function may also be used by simulation-based solvers on non-Simulation domains."""
+        a simulation). This function may also be used by simulation-based solvers on non-Simulation domains.
+        """
         return DeterministicTransitions._state_sample(self, memory, action)
 
     def _get_next_state_distribution(
@@ -1234,9 +1242,9 @@ class SchedulingActionSpace(
         for choice in choices:
             if choice == SchedulingActionEnum.START:
                 # task, mode, list of Ressources
-                task_possible_to_start: Dict[
-                    int, Dict[int, List[str]]
-                ] = self.domain.get_possible_starting_tasks(self.state)
+                task_possible_to_start: Dict[int, Dict[int, List[str]]] = (
+                    self.domain.get_possible_starting_tasks(self.state)
+                )
                 list_action += [
                     SchedulingAction(
                         task=t,
@@ -1314,9 +1322,9 @@ class SchedulingActionSpaceWithResourceUnit(
         for choice in choices:
             if choice == SchedulingActionEnum.START:
                 # task, mode, list of Ressources
-                task_possible_to_start: Dict[
-                    int, Dict[int, List[str]]
-                ] = self.domain.get_possible_starting_tasks(self.state)
+                task_possible_to_start: Dict[int, Dict[int, List[str]]] = (
+                    self.domain.get_possible_starting_tasks(self.state)
+                )
                 for possible_to_start in task_possible_to_start:
                     for mode in task_possible_to_start[possible_to_start]:
                         possible = self.domain.find_one_ressource_to_do_one_task(
@@ -1407,13 +1415,13 @@ class SchedulingActionSpaceWithResourceUnitSamplable(SamplableSpace[SchedulingAc
         random_choice = random.choice(choices)
         if random_choice in {SchedulingActionEnum.START, SchedulingActionEnum.RESUME}:
             if random_choice == SchedulingActionEnum.START:
-                task_possible_to_start: Dict[
-                    int, Dict[int, List[str]]
-                ] = self.domain.get_possible_starting_tasks(self.state)
+                task_possible_to_start: Dict[int, Dict[int, List[str]]] = (
+                    self.domain.get_possible_starting_tasks(self.state)
+                )
             else:
-                task_possible_to_start: Dict[
-                    int, Dict[int, List[str]]
-                ] = self.domain.get_possible_resume_tasks(self.state)
+                task_possible_to_start: Dict[int, Dict[int, List[str]]] = (
+                    self.domain.get_possible_resume_tasks(self.state)
+                )
             task_modes = [
                 (t, m)
                 for t in task_possible_to_start
