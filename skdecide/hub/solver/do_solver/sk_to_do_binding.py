@@ -66,7 +66,7 @@ def build_do_domain(
         MultiModeMultiSkillRCPSP,
         MultiModeMultiSkillRCPSPCalendar,
         SingleModeRCPSP_Stochastic_Durations,
-    ]
+    ],
 ):
     if isinstance(scheduling_domain, SingleModeRCPSP):
         modes_details = scheduling_domain.get_tasks_modes().copy()

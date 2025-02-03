@@ -839,7 +839,7 @@ def test_gecode_optimality(domain, do_solver):
         assert makespan == optimal_solutions["ToyMS_RCPSPDomain"]["makespan"]
 
 
-@pytest.mark.parametrize("domain", [(ToySRCPSPDomain())])
+@pytest.mark.parametrize("domain", [ToySRCPSPDomain()])
 def test_compute_all_graph(domain):
     # Check also examples/scheduling/pi2/rcpsp_pi2/check_uncertain_domain to maybe check if the DFSExploration
     # create well the graph.
@@ -890,7 +890,7 @@ def test_compute_all_graph(domain):
                     )  # duration are coherent with the input distribution
 
 
-@pytest.mark.parametrize("domain", [(ToySRCPSPDomain())])
+@pytest.mark.parametrize("domain", [ToySRCPSPDomain()])
 def test_sgs_policies(domain):
     deterministic_domains = build_n_determinist_from_stochastic(domain, nb_instance=1)
     training_domains = deterministic_domains
