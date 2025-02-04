@@ -23,21 +23,21 @@ repos:
     -   id: check-added-large-files
 
   - repo: https://github.com/psf/black
-    rev: 24.10.0 # Replace by any tag/version: https://github.com/psf/black/tags
+    rev: 25.1.0 # Replace by any tag/version: https://github.com/psf/black/tags
     hooks:
       - id: black
         language_version: python3
         exclude: ^cpp/
 
   - repo: https://github.com/pre-commit/mirrors-clang-format
-    rev: v19.1.6
+    rev: v19.1.7
     hooks:
       - id: clang-format
         args: [-i, -style=file]
         files: ^cpp/src/.*\.[ch]{2}$
 
   - repo: https://github.com/pycqa/isort
-    rev: 5.13.2
+    rev: 6.0.0
     hooks:
       - id: isort
         name: isort (python)
